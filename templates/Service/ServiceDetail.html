@@ -1,0 +1,140 @@
+{% extends "base.html" %} {% block content %}
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>{{service.title}}</h2>
+          <ol>
+            <li><a href="index.html">Services</a></li>
+            <li>{{service.name}}</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+
+        <!-- ======= Breadcrumbs ======= -->
+    <section class="inner-page">
+      <div class="container">
+
+       <!-- About  Servise -->
+       <div class="row">
+       <div class="col-md-7">
+       <img src="/media/{{service.image}}" class="rounded" width="90%" alt="{{service.title}}">
+       </div>
+       <div class="col-md-5">
+            <div class="section-title">
+            <span>   
+              {{service.name}}
+            </span>
+            <h2>
+              {{service.name}}
+            </h2>
+          </div>
+
+            <p>
+              {{service.description | safe}}
+            </p>
+              
+       </div>
+
+       </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+<!-- ======= pricing Section ======= -->
+
+<div id="generic_price_table">
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <!--PRICE HEADING START-->
+          <div class="price-heading clearfix">
+            <h1>Plans</h1>
+          </div>
+          <!--//PRICE HEADING END-->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+
+
+      <!--BLOCK ROW START-->
+      <div class="row">
+
+      {% for plan in plans %}
+        <div class="col-md-4">
+          <!--PRICE CONTENT START-->
+          {%if plan.recommended%}
+          <div class="generic_content active clearfix">
+          {%else%}
+          <div class="generic_content clearfix">
+          {%endif%}
+            <!--HEAD PRICE DETAIL START-->
+            <div class="generic_head_price clearfix">
+              <!--HEAD CONTENT START-->
+              <div class="generic_head_content clearfix">
+                <!--HEAD START-->
+                <div class="head_bg"></div>
+                <div class="head">
+                  <span>{{plan.name}}</span>
+                </div>
+                <!--//HEAD END-->
+              </div>
+              <!--//HEAD CONTENT END-->
+
+              <!--PRICE START-->
+              <div class="generic_price_tag clearfix">
+                <span class="price">
+                  <span class="currency">{{plan.price}}</span>
+                  <span class="cent">Mad</span>
+                
+                </span>
+              </div>
+              <!--//PRICE END-->
+            </div>
+            <!--//HEAD PRICE DETAIL END-->
+
+            <!--FEATURE LIST START-->
+            <div class="generic_feature_list">
+              <ul>
+              {% for item in plan.items.all %}
+                {% if item.checked %}
+                <li class="text-dark"><span><i class="bi bi-check-all"></i></span>{{item.item}}</li>
+                {% else %}
+                <li class="text-danger"><i class="bi bi-x"></i></span>{{item.item}}</li>
+                {% endif %}
+              {%endfor%}
+              </ul>
+            </div>
+            <!--//FEATURE LIST END-->
+
+            <!--BUTTON START-->
+            <div class="generic_price_btn clearfix">
+              <a class="" href="#n">Order</a>
+            </div>
+            <!--//BUTTON END-->
+          </div>
+          <!--//PRICE CONTENT END-->
+        </div>
+          {% empty %}
+        <div class="d-flex justify-content-center align-items-center">
+            Aucun plan pour l'instant, veuillez &nbsp;<a href="/#contact">contacter </a>&nbsp; le support pour plus d'informations. 
+        </div>
+
+
+        {% endfor %}
+
+      </div>
+      <!--//BLOCK ROW END-->
+    </div>
+  </section>
+</div>
+<!-- End #pricing -->
+
+{% endblock %}

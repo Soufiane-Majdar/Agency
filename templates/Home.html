@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block content %}
+
+<!-- ======= Hero Section ======= -->
+
+{% include "Main/Hero.html" %}
+<!-- End Hero -->
+
+<main id="main">
+  <!-- =======  About ======= -->
+  {% include "Main/About.html" %}
+  <!-- End  About -->
+
+  <!-- ======= Services ======= -->
+  {% include "Main/Services.html" %}
+  <!-- End Services -->
+
+  <!-- ======= Portfolio ======= -->
+  {% include "Main/Portfolio.html" %}
+  <!-- End Portfolio -->
+
+  <!-- ======= Team ======= -->
+  {% comment %} {% include "Main/Team.html" %} {% endcomment %}
+  <!-- End Team -->
+
+  <!-- ======= Contact ======= -->
+  {% include "Main/Contact.html" %}
+  <!-- End Contact -->
+</main>
+<!-- End #main -->
+
+
+
+
+{% endblock %}

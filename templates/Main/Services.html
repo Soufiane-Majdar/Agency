@@ -1,0 +1,30 @@
+<section id="services" class="services section-bg">
+    <div class="container">
+      <div class="section-title">
+        <span>        
+        {{Info.Services_title}}
+        </span>
+        <h2>
+          {{Services_title}}
+        </h2>
+        <p>
+          {{Services_description | safe}}
+        </p>
+      </div>
+  
+      <div class="row">
+  
+    {% for service in services%}
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-3">
+          <div class="icon-box">
+            <div class="icon"><i class='{{service.icon}}'></i></div>
+            <h4><a href="{% url 'service' id=service.id %}">{{service.name}}</a></h4>
+            <p>
+              {{service.description | safe |truncatechars:100}}
+            </p>
+          </div>
+        </div>
+      {% endfor %}
+   
+    </div>
+  </section>

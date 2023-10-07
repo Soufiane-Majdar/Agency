@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>{{website_name}} - {{title}}</title>
+    <meta content="{{website_description}}" name="description" />
+    <meta content="web-developer, web-dev, design, website,maroc ,morocco" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="/static/assets/img/favicon.png" rel="icon" />
+    <link
+      href="/static/assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="/static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="/static/assets/css/style.css" rel="stylesheet" />
+  
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center justify-content-between">
+        <a href="/" class="logo"><img src="{{website_logo}}" alt=""  ></a> 
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="/"><i class='bx bx-home-alt-2 bx-sm'></i></a></li>
+            <li><a class="nav-link scrollto text-lowercase" href="/#about">{{about_title}}</a></li>
+            <li class="dropdown">
+              <a class="nav-link scrollto text-lowercase" href="/#services">
+                <span>{{Services_title}}</span> <i class="bi bi-chevron-down"></i>
+              </a>
+              <ul> 
+                {% for service in services%}
+                <li><a href="{% url 'service' id=service.id %}">{{service.title}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            <li>
+              <a class="nav-link scrollto text-lowercase" href="/#portfolio">{{Portfolio_title}}</a>
+            </li>
+
+            <li><a class="nav-link scrollto text-lowercase" href="/#contact">{{Contact_title}}</a></li>
+            
+          
+          {% comment %} {% if request.session.username %}
+          <li>
+              <a class="nav-link scrollto text-lowercase" href="{% url 'dashboard' %}">Dashboard</a>
+          </li>
+          {% endif %} {% endcomment %}
+          
+            
+
+
+
+          {% comment %} <li>
+          {% if request.session.username %}
+              <a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right" style="font-size: 30px"></i></a>
+          {% else %}
+              <a href="{% url 'login' %}"><i class="bi bi-person" style="font-size: 30px"></i></a>
+          {% endif %}
+          </li> {% endcomment %}
+
+
+       
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= content Section ======= -->
+
+    {% block content %} {% endblock %}
+
+    <!-- End content -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <h3>{{website_name}}</h3>
+              <p>
+                {{website_description | safe}}
+              </p>
+            </div>
+          </div>
+
+          <div class="row footer-newsletter justify-content-center">
+            <div class="col-lg-6">
+              <form action="{% url 'subscribe' %}" method="post">
+                {% csrf_token %}
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Entrer votre Email"
+                /><input type="submit" value="Subscribe" />
+              </form>
+            </div>
+          </div>
+
+        <div class="social-links">
+            <a href="{{github}}" class="twitter" target="_blank"><i class="bx bxl-github"></i></a>
+            <a href="mailto:{{Email}}" class="facebook" target="_blank"><i class="bx bxl-gmail"></i></a>
+            <a href="{{linkedin}}" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
+          </div> 
+          
+        </div>
+      </div>
+
+      <div class="container footer-bottom clearfix">
+        <div class="copyright">
+          &copy; Copyright <strong><span>{{website_name}}</strong
+          >. 
+        </div>
+        <div class="credits">
+          Created by <a href="{{github}}" target="_blank">{{owner_name}}</a>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="/static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    {% comment %} <script src="/static/assets/vendor/php-email-form/validate.js"></script> {% endcomment %}
+
+    <!-- Template Main JS File -->
+    <script src="/static/assets/js/main.js"></script>
+  </body>
+</html>
