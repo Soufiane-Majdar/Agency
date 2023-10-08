@@ -56,7 +56,6 @@
 
         <nav id="navbar" class="navbar">
           <ul>
-            <li><a class="nav-link scrollto active" href="/"><i class='bx bx-home-alt-2 bx-sm'></i></a></li>
             <li><a class="nav-link scrollto text-lowercase" href="/#about">{{about_title}}</a></li>
             <li class="dropdown">
               <a class="nav-link scrollto text-lowercase" href="/#services">
@@ -64,7 +63,7 @@
               </a>
               <ul> 
                 {% for service in services%}
-                <li><a href="{% url 'service' id=service.id %}">{{service.title}}</a></li>
+                <li><a href="{% url 'service' id=service.id %}">{{service.name}}</a></li>
                 {% endfor %}
               </ul>
             </li>
@@ -94,6 +93,7 @@
           </li> {% endcomment %}
 
 
+          <li><a class="nav-link scrollto active" href="/"><i class='bx bx-home-alt-2 bx-sm'></i></a></li>
        
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>

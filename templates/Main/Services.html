@@ -12,19 +12,22 @@
         </p>
       </div>
   
-      <div class="row">
+   
+      <div class="row" >
   
     {% for service in services%}
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-3">
+        <div class="col-lg-6 col-md-6 d-flex align-items-stretch mb-3">
           <div class="icon-box">
             <div class="icon"><i class='{{service.icon}}'></i></div>
             <h4><a href="{% url 'service' id=service.id %}">{{service.name}}</a></h4>
             <p>
-              {{service.description | safe |truncatechars:100}}
+              {{service.description | safe |truncatechars:150}}
             </p>
           </div>
         </div>
-      {% endfor %}
-   
+    {% endfor %}
+ 
     </div>
+
+
   </section>
