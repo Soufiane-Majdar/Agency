@@ -80,6 +80,77 @@ def contact(request):
     return home(request)
 
 
+
+
+
+## login as client
+def login(request):
+
+    title="Login"
+    context={'title':title}
+
+    # if the method is post
+    if request.method == 'POST':
+        # get the username and password
+        username = request.POST['username']
+        password = request.POST['password']
+
+        # check if the client exists
+        if Client.objects.filter(username=username).exists():
+            # get the client
+            client = Client.objects.get(username=username)
+
+            # check if the password is correct
+            if client.password == password:
+                # login the client
+                request.session['client_id'] = client.id
+                return home(request)
+            else:
+                context['error'] = 'Password is incorrect'
+                # add get_web_info
+                context.update(get_web_info())
+                # return the login page with error
+                return render(request, 'User/login.html', context)
+        else:
+            context['error'] = 'Client not found'
+            # add get_web_info
+            context.update(get_web_info())
+            # return the login page with error
+            return render(request, 'User/login.html', context)
+
+    context.update(get_web_info())
+    # if the method is get
+    return render(request, 'User/login.html', context)
+
+# logout
+def logout(request):
+    # delete the session
+    del request.session['client_id']
+
+    # return home
+    return home(request)
+
+# client dashboard
+def dashboard(request):
+    return HttpResponse('dashboard')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def get_web_info():
     # get the web info object
     web_info = WebInfo.objects.all().first()
@@ -148,5 +219,3 @@ def get_web_info():
         'linkedin': linkedin,
         'github': github,
     }
-
-

@@ -9,4 +9,11 @@ urlpatterns = [
     path('service/<int:id>/', service, name='service'),
 
     path('contact/', contact, name="contact"),
+
+    # login
+    path('login/', login, name='login'),
+    path('logout/', logout, name='logout'),
+
+    # dashboard
+    path('dashboard/', dashboard, name='dashboard'),
 ]

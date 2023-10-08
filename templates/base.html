@@ -76,9 +76,9 @@
             <li><a class="nav-link scrollto text-lowercase" href="/#contact">{{Contact_title}}</a></li>
             
           
-          {% if request.session.username %}
+          {% if request.session.client_id %}
           <li>
-              <a class="nav-link scrollto text-lowercase" href="#">Dashboard</a>
+              <a class="nav-link scrollto text-lowercase" href="{%url 'dashboard' %}">Dashboard</a>
           </li>
           {% endif %}
           
@@ -87,10 +87,10 @@
 
 
           <li>
-          {% if request.session.username %}
-              <a href="#"><i class="bi bi-box-arrow-right" style="font-size: 30px"></i></a>
+          {% if request.session.client_id %}
+              <a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right" style="font-size: 30px"></i></a>
           {% else %}
-              <a href="#"><i class="bi bi-person" style="font-size: 30px"></i></a>
+              <a href="{% url 'login' %}"><i class="bi bi-person" style="font-size: 30px"></i></a>
           {% endif %}
           </li>
 
