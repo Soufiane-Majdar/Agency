@@ -10,7 +10,22 @@ def home(request):
     # services
     services = Service.objects.all()
 
-    context = {'title': title, 'services': services}
+    #get portfolios
+    portfolios = Portfolio.objects.all()
+
+    # get all categories of the portfolios
+    P_Category = []
+    for portfolio in portfolios:
+        if portfolio.category not in P_Category:
+            P_Category.append(portfolio.category)
+
+    # get the testimonials
+    testimonials = Testimonial.objects.all()
+
+    print(testimonials)
+
+
+    context = {'title': title, 'services': services, 'portfolios': portfolios, 'P_Category': P_Category, 'testimonials': testimonials}
 
     context.update(get_web_info())
 
@@ -26,6 +41,8 @@ def service(request, id):
 
     # get the plans
     plans = service.plans.all()
+
+
 
     context = {'title': title, 'service': service, 'plans': plans}
 
@@ -76,6 +93,10 @@ def get_web_info():
     Portfolio_title = web_info.Portfolio_title
     Portfolio_description = web_info.Portfolio_description
 
+    # Testimonial info :
+    Testimonial_title = web_info.Testimonial_title
+    Testimonial_description = web_info.Testimonial_description
+
     # Contact info :
     Contact_title = web_info.Contact_title
     Contact_description = web_info.Contact_description
@@ -102,6 +123,8 @@ def get_web_info():
         'Services_description': Services_description,
         'Portfolio_title': Portfolio_title,
         'Portfolio_description': Portfolio_description,
+        'Testimonial_title': Testimonial_title,
+        'Testimonial_description': Testimonial_description,
         'Contact_title': Contact_title,
         'Contact_description': Contact_description,
         'Location': Location,

@@ -7,8 +7,11 @@ from django.utils import timezone
 class Client(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
+    username = models.CharField(max_length=100, blank=True)
+    password = models.CharField(max_length=100  ,blank=True)
     phone_number = models.CharField(max_length=20)
     company_name = models.CharField(max_length=100, blank=True)
+    is_active = models.BooleanField(default=True,blank=True)
     # project_history my have many projects
     # project_history = models.ManyToManyField(Project, blank=True)
 
@@ -72,7 +75,7 @@ class Project(models.Model):
 
 
 class Testimonial(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client,blank=True, null=True,on_delete=models.CASCADE)
     content = RichTextField()
     date = models.DateField(default=timezone.now)
     RATING_CHOICES = (
@@ -98,6 +101,18 @@ class ContactForm(models.Model):
 
     def __str__(self):
         return self.name
+        
+
+# Portfolio Model
+class Portfolio(models.Model):
+    title = models.CharField(max_length=100)
+    category = models.CharField(max_length=100)
+    # description = RichTextField()
+    image = models.ImageField(upload_to='portfolio/', blank=True)
+    link = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Subscriber(models.Model):
@@ -152,6 +167,9 @@ class WebInfo(models.Model):
 
     Portfolio_title = models.CharField(max_length=150)
     Portfolio_description = RichTextField(null=True, blank=True)
+
+    Testimonial_title = models.CharField(max_length=150,blank=True)
+    Testimonial_description = RichTextField(null=True, blank=True)
 
     Contact_title = models.CharField(max_length=150)
     Contact_description = RichTextField(null=True, blank=True)

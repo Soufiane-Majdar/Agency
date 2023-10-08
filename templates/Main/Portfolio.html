@@ -1,1 +1,58 @@
-this is Portfolio
+<section id="portfolio" class="portfolio">
+    <div class="container">
+      <div class="section-title">
+        <span>
+          {{Portfolio_title}}
+        </span>
+        <h2>
+          {{Portfolio_title}}
+        </h2>
+        <p class="px-5">
+          {{Portfolio_description | safe}}
+        </p>
+      </div>
+  
+      <div class="row">
+        <div class="col-lg-12 d-flex justify-content-center">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+            {% for p in P_Category%}
+            <li data-filter=".filter-{{p}}">{{p}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+  
+      <div class="row portfolio-container" >
+      {% for portfolio in portfolios %}
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-{{portfolio.category}}">
+            <img
+              src="/media/{{portfolio.image}}"
+              class="img-fluid rounded"
+              alt=""
+            />
+            <div class="portfolio-info">
+              <h4><a href="{{portfolio.link}}" target="_blank">{{portfolio.title}}</a></h4>
+              <p>{{portfolio.title}}</p>
+              <a
+                href="/media/{{portfolio.image}}"
+                data-gallery="portfolioGallery"
+                class="portfolio-lightbox preview-link"
+                title="{{portfolio.name}}"
+                ><i class="bx bx-plus"></i
+              ></a>
+               <a
+                href="{{portfolio.link}}"
+                class="details-link"
+                title="More Details"
+                ><i class="bx bx-link"></i
+              ></a> 
+            </div>
+          </div>
+          {%endfor%}
+      </div>
+      
+  
+    </div>
+  </section>

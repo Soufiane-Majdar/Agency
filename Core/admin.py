@@ -44,6 +44,11 @@ class SubscriberAdmin(admin.ModelAdmin):
     list_display = ('email','date','is_subscribed')
     search_fields = ('email','date')
 
+@admin.register(Portfolio)
+class PortfolioAdmin(admin.ModelAdmin):
+    list_display = ('title','category')
+    search_fields = ('title','category')
+
 
 admin.site.register(SMTPHost)
 admin.site.register(WebInfo)
