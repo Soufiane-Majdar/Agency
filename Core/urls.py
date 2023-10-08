@@ -7,4 +7,6 @@ urlpatterns = [
     
     # service
     path('service/<int:id>/', service, name='service'),
+
+    path('contact/', contact, name="contact"),
 ]

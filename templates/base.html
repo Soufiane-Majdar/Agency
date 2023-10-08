@@ -71,26 +71,28 @@
               <a class="nav-link scrollto text-lowercase" href="/#portfolio">{{Portfolio_title}}</a>
             </li>
 
+            <li><a class="nav-link scrollto text-lowercase" href="/#testimonials">{{Testimonial_title}}</a></li>
+
             <li><a class="nav-link scrollto text-lowercase" href="/#contact">{{Contact_title}}</a></li>
             
           
-          {% comment %} {% if request.session.username %}
+          {% if request.session.username %}
           <li>
-              <a class="nav-link scrollto text-lowercase" href="{% url 'dashboard' %}">Dashboard</a>
+              <a class="nav-link scrollto text-lowercase" href="#">Dashboard</a>
           </li>
-          {% endif %} {% endcomment %}
+          {% endif %}
           
             
 
 
 
-          {% comment %} <li>
+          <li>
           {% if request.session.username %}
-              <a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right" style="font-size: 30px"></i></a>
+              <a href="#"><i class="bi bi-box-arrow-right" style="font-size: 30px"></i></a>
           {% else %}
-              <a href="{% url 'login' %}"><i class="bi bi-person" style="font-size: 30px"></i></a>
+              <a href="#"><i class="bi bi-person" style="font-size: 30px"></i></a>
           {% endif %}
-          </li> {% endcomment %}
+          </li>
 
 
           <li><a class="nav-link scrollto active" href="/"><i class='bx bx-home-alt-2 bx-sm'></i></a></li>

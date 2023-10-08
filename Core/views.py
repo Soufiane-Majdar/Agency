@@ -65,6 +65,21 @@ def subscribe(request):
     return home(request)
 
 
+# contact
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        subject = request.POST['subject']
+        email = request.POST['email']
+        message = request.POST['message']
+
+        # save the contact form
+        contact_form = ContactForm(name=name, subject=subject, email=email, message=message)
+        contact_form.save()
+    
+    return home(request)
+
+
 def get_web_info():
     # get the web info object
     web_info = WebInfo.objects.all().first()
