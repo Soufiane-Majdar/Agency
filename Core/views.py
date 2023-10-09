@@ -122,6 +122,16 @@ def login(request):
     # if the method is get
     return render(request, 'User/login.html', context)
 
+
+def signup(request):
+
+    title="Register"
+    context={'title':title}
+
+    context.update(get_web_info())
+    return render(request, 'User/singup.html', context)
+
+
 # logout
 def logout(request):
     # delete the session

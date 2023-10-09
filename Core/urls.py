@@ -12,7 +12,9 @@ urlpatterns = [
 
     # login
     path('login/', login, name='login'),
+    path('signup/', signup, name='signup'),
     path('logout/', logout, name='logout'),
+
 
     # dashboard
     path('dashboard/', dashboard, name='dashboard'),
