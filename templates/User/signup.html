@@ -1,8 +1,6 @@
 {% extends "base.html" %} {% block content %}
 
-
-
-<section id="contact" class="contact mt-4">
+<section id="contact" class="contact mt-5">
   <div class="container">
     <div class="section-title">
       <span>
@@ -17,111 +15,93 @@
         {{error}}
       </div>
       {% endif %}
-   
+
     </div>
 
     <div class="row">
-    <center>
-    <div class="col-lg-5 d-flex align-items-stretch">
-      
+      <center>
+        <div class="col-lg-10 d-flex align-items-stretch">
 
-      <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch">
-       
+          <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch">
 
-       
-        <form
-          action=""
-          method="post"
-          role="form"
-          class="php-email-form">
-          {% csrf_token %}
-          <div class="row">
-            <div class="form-outline  col-md-6">
-                <input type="text"
-                name="full_name"
-                class="form-control"
-                id="full_name"
-                required class="form-control" />
-                <label class="form-label" for="full_name">Full Name</label>
-            </div>
+            <form
+              action="{% url 'signup' %}"
+              method="post"
+              role="form"
+              class="php-email-form">
+              {% csrf_token %}
+              <div class="row ">
+                <div class="form-outline  col-md-6">
+                  <label class="text-muted" for="full_name">Nom complet</label>
+                  <input type="text"
+                    name="full_name"
+                    class="form-control"
+                    id="full_name"
+                    required />
+                </div>
 
-            <div class="form-outline  col-md-6">
-                <input type="text"
-                name="username"
-                class="form-control"
-                id="username"
-                required class="form-control" />
-                <label class="form-label" for="username">Username</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-outline col-md-6">
-                <input type="email"
-                name="email"
-                class="form-control"
-                id="email"
-                required class="form-control" />
-                <label class="form-label" for="email">Email</label>
-            </div>
-        
-            
-            <!-- Password input -->
-            <div class="form-outline col-md-6">
-                <input type="password"
-                name="password"
-                class="form-control"
-                id="password"
-                required class="form-control" />
-                <label class="form-label" for="password">Password</label>
-            </div>
-            </div>
-            <div class="row">
+                <div class="form-outline  col-md-6">
+                  <label class="text-muted" for="username">Nom d'utilisateur</label>
+                  <input type="text"
+                    name="username"
+                    class="form-control"
+                    id="username"
+                    required />
+                </div>
+              </div>
+              <div class="row mt-3">
                 <div class="form-outline col-md-6">
-                    <input type="text"
+                  <label class="text-muted" for="email">Email</label>
+                  <input type="email"
+                    name="email"
+                    class="form-control"
+                    id="email"
+                    required />
+                </div>
+
+                <!-- Mot de passe -->
+                <div class="form-outline col-md-6">
+                  <label class="text-muted" for="password">Mot de passe</label>
+                  <input type="password"
+                    name="password"
+                    class="form-control"
+                    id="password"
+                    required />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="form-outline col-md-6">
+                  <label class="text-muted" for="phone">Téléphone</label>
+                  <input type="text"
                     name="phone"
                     class="form-control"
-                    id="phone"
-                    class="form-control" />
-                    <label class="form-label" for="phone">Phone</label>
+                    id="phone" />
                 </div>
 
                 <div class="form-outline col-md-6">
-                    <input type="text"
+                  <label class="text-muted" for="company">Nom de l'entreprise</label>
+                  <input type="text"
                     name="company"
                     class="form-control"
-                    id="company"
-                    class="form-control" />
-                    <label class="form-label" for="company">Company Name</label>
+                    id="company" />
                 </div>
-          </div>
+              </div>
 
-        
-          <!-- 2 column grid layout for inline styling -->
-          <div class="row mb-4">
-            <div class="col">
-              <!-- Simple link -->
-              <a href="#!">Forgot password?</a>
-            </div>
-          </div>
-        
-          <!-- Submit button -->
-          <div class="text-center">
-            <button type="submit">Register</button>
-          </div>
+              <!-- Bouton de soumission -->
+              <div class="text-center mt-5">
+                <button type="submit">S'inscrire</button>
+              </div>
 
-          <!-- Register buttons -->
-          <div class="text-center mt-4">
-            <p>Not a member? <a href="{%url 'login' %}">Login</a></p>
+              <!-- Boutons d'enregistrement -->
+              <div class="text-center mt-4">
+                <p>Vous avez déjà un compte ? <a href="{%url 'login' %}">Connexion</a></p>
+              </div>
+            </form>
           </div>
-
-
-        </form>
-      </div>
+        </div>
+      </center>
     </div>
-    </center>
   </div>
 </section>
-
-
 
 {% endblock %}

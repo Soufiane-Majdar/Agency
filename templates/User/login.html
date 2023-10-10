@@ -1,9 +1,6 @@
 {% extends "base.html" %} {% block content %}
 
-
-
-
-<section id="contact" class="contact mt-4">
+<section id="contact" class="contact mt-5">
   <div class="container">
     <div class="section-title">
       <span>
@@ -18,72 +15,66 @@
         {{error}}
       </div>
       {% endif %}
-   
+
     </div>
 
     <div class="row">
-    <center>
-    <div class="col-lg-5 d-flex align-items-stretch">
-      
+      <center>
+        <div class="col-lg-6 d-flex align-items-stretch">
 
-      <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch">
-       
+          <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch">
 
-       
-        <form
-          action="{% url 'login' %}"
-          method="post"
-          role="form"
-          class="php-email-form">
-          {% csrf_token %}
-          <!-- Email input -->
-          <div class="form-outline mb-4">
-            <input type="text"
-            name="username"
-            class="form-control"
-            id="username"
-            required class="form-control" />
-            <label class="form-label" for="username">Username</label>
-          </div>
-        
-          <!-- Password input -->
-          <div class="form-outline mb-4">
-            <input type="password"
-            name="password"
-            class="form-control"
-            id="password"
-            required class="form-control" />
-            <label class="form-label" for="password">Password</label>
-          </div>
-        
-          <!-- 2 column grid layout for inline styling -->
-          <div class="row mb-4">
-            <div class="col">
-              <!-- Simple link -->
-              <a href="#!">Forgot password?</a>
-            </div>
-          </div>
-        
-          <!-- Submit button -->
-          <div class="text-center">
-            <button type="submit">Login</button>
-          </div>
+            <form
+              action="{% url 'login' %}"
+              method="post"
+              role="form"
+              class="php-email-form">
+              {% csrf_token %}
+              <!-- Champ pour le nom d'utilisateur -->
+              <div class="form-group mb-4">
+                <label class="text-muted" for="username">Nom d'utilisateur</label>
+                <input type="text"
+                  name="username"
+                  class="form-control"
+                  id="username"
+                  required class="text-muted" />
+              </div>
 
-          <!-- Register buttons -->
-          <div class="text-center mt-4">
-            <p>Not a member? <a href="{%url 'signup' %}">Register</a></p>
+              <!-- Champ pour le mot de passe -->
+              <div class="form-outline mb-4">
+                <label class="text-muted" for="password">Mot de passe</label>
+
+                <input type="password"
+                  name="password"
+                  class="form-control"
+                  id="password"
+                  required class="text-muted" />
+              </div>
+
+              <!-- Mise en page en colonnes pour le style en ligne -->
+              <div class="row mb-4">
+                <div class="col">
+                  <!-- Lien simple -->
+                  <a href="#!">Mot de passe oublié ?</a>
+                </div>
+              </div>
+
+              <!-- Bouton de soumission -->
+              <div class="text-center">
+                <button type="submit">Connexion</button>
+              </div>
+
+              <!-- Boutons d'enregistrement -->
+              <div class="text-center mt-4">
+                <p>Pas encore membre ? <a href="{%url 'signup' %}">S'inscrire</a></p>
+              </div>
+
+            </form>
           </div>
-
-
-        </form>
-      </div>
+        </div>
+      </center>
     </div>
-    </center>
   </div>
 </section>
-
-
-
-
 
 {% endblock %}

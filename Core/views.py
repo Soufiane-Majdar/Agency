@@ -87,7 +87,12 @@ def contact(request):
 def login(request):
 
     title="Login"
-    context={'title':title}
+    # services
+    services = Service.objects.all()
+    context={'title':title,'services':services}
+
+
+    
 
     # if the method is post
     if request.method == 'POST':
@@ -126,7 +131,9 @@ def login(request):
 def signup(request):
 
     title="Register"
-    context={'title':title}
+    # services
+    services = Service.objects.all()
+    context={'title':title,'services':services}
 
     # if the method is post
 # get the data : [full_name,username,email,password,phone,company]
@@ -175,7 +182,9 @@ def logout(request):
 # client dashboard
 def dashboard(request):
     title="Dashboard"
-    context={'title':title}
+    # services
+    services = Service.objects.all()
+    context={'title':title,'services':services}
    # if client not logged in
     if 'client_id' not in request.session:
         return login(request)
@@ -192,6 +201,30 @@ def dashboard(request):
 
     return render(request, 'User/dashboard.html', context)
     
+
+#update function to update client info
+def update(request):
+    if request.method == 'POST':
+        # get the data
+        full_name = request.POST['full_name']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        phone = request.POST['phone']
+        company = request.POST['company']
+
+                # save the client
+        client = Client(name=full_name, username=username, email=email, password=password, phone_number=phone, company_name=company)
+        client.save()
+
+        # login the client
+        request.session['client_id'] = client.id
+        return dashboard(request)
+
+
+
+    else:
+        return dashboard(request)
 
 
 

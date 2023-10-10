@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- Load Bootstrap CSS -->
+<!-- Charger le CSS de Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 <section id="services" class="services section-bg">
-<!-- Dashboard header -->
+<!-- En-tête du tableau de bord -->
 <div class="container-fluid mt-6">
 
     <br>
@@ -12,47 +12,73 @@
     <br>
     <div class="section-title">
         <span>
-            Helo {{ client.username }}!
+            Bonjour {{ client.username }} !
         </span>
         <h2>
-            Helo {{ client.username }}!
+            Bonjour {{ client.username }} !
         </h2>
-      </div>
+    </div>
 
     <div class="row mt-6">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Your Infos</div>
+                <div class="card-header">Vos Informations</div>
                 <div class="card-body">
-                    <p><strong>Username:</strong> {{ client.username }}</p>
-                    <p><strong>Name:</strong> {{ client.name }}</p>
-                    <p><strong>Email:</strong> {{ client.email }}</p>
-                    <p><strong>Phone:</strong> {{ client.phone_number }}</p>
-                    <p><strong>Company:</strong> {{ client.company_name }}</p>
-                    <!--update info button and a modal contain undate form-->
+                    <p><strong>Nom d'utilisateur :</strong> {{ client.username }}</p>
+                    <p><strong>Nom :</strong> {{ client.name }}</p>
+                    <p><strong>Email :</strong> {{ client.email }}</p>
+                    <p><strong>Téléphone :</strong> {{ client.phone_number }}</p>
+                    <p><strong>Entreprise :</strong> {{ client.company_name }}</p>
+                    <!-- Bouton de mise à jour d'informations et un formulaire de mise à jour -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal">
-                        Update Info
+                        Mettre à jour les informations
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
-                        <!--udate Form-->
+                        <!-- Formulaire de mise à jour -->
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="projectModalLabel">Update Info</h5>
+                                    <h5 class="modal-title" id="projectModalLabel">Mettre à jour les informations</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                    <div class="modal-body">
-                                        <form action="" method="Post">
-                                            <p>not done yet</p>
-                                            
+                                </div>
+                                <div class="modal-body mt-3">
+                                    <form
+                                        action="{%url 'update' %}"
+                                        method="post"
+                                        role="form"
+                                    >
+                                        {% csrf_token %}
 
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
+                                        <div class="col">
+                                            <input type="text" name="full_name" class="form-control" id="full_name" value="{{ client.name }}" placeholder="Entrez le nom">
+                                        </div>
+                                        <div class="col mt-1">
+                                            <input type="text" name="username" class="form-control" id="username" value="{{ client.username }}" placeholder="Entrez le nom d'utilisateur">
+                                        </div>
+                                        <div class="col mt-1">
+                                            <input type="email" name="email" class="form-control" id="email" value="{{ client.email }}" placeholder="Entrez l'email">
+                                        </div>
+                                        <div class="col mt-1">
+                                            <input type="password" name="password" class="form-control" id="password" value="{{ client.password }}" placeholder="Entrez le mot de passe">
+                                        </div>
+                                        <div class="col mt-1">
+                                            <input type="text" name="phone" class="form-control" id="phone" value="{{ client.phone_number }}" placeholder="Entrez le téléphone">
+                                        </div>
+                                        <div class="col mt-1">
+                                            <input type="text" name="company" class="form-control" id="company" value="{{ client.company_name }}" placeholder="Entrez le nom de l'entreprise">
+                                        </div>
+
+                                        <!-- Bouton de soumission -->
+                                        <div class="text-center mt-3">
+                                            <button type="submit" class="btn btn-outline-success">Mettre à jour</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                 </div>
                             </div>
                         </div>
@@ -62,70 +88,72 @@
         </div>
     </div>
 
-    <!-- Project info -->
+    <!-- Informations sur le projet -->
     <div class="row mt-2">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Projects Info</div>
+                <div class="card-header">Informations sur les projets</div>
                 <div class="card-body">
                     <div class="table-responsive">
-                    <table class="table ">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Plan</th>
-                                <th>Payment Status</th>
-                                <th>Status</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for project in projects %}
-                            <tr>
-                                <td>{{ project.title }}</td>
-                                <td>{{ project.description | safe |truncatechars:100}}</td>
-                                <td>{{ project.start_date }}</td>
-                                <td>{{ project.end_date }}</td>
-                                <td>{{ project.plan }}</td>
-                                <td>{{ project.payment_status }}</td>
-                                <td>{{ project.status }}</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#projectModal{{ project.id }}">
-                                        Details
-                                    </button>
-                                </td>
-                            </tr>
-                            <!-- Project Modal -->
-                            <div class="modal fade" id="projectModal{{ project.id }}" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="projectModalLabel">{{ project.title }}</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Description</th>
+                                    <th>Date de début</th>
+                                    <th>Date de fin</th>
+                                    <th>Plan</th>
+                                    <th>Statut de paiement</th>
+                                    <th>Statut</th>
+                                    <th>Détails</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for project in projects %}
+                                    <tr>
+                                        <td>{{ project.title }}</td>
+                                        <td>{{ project.description | safe | truncatechars:100 }}</td>
+                                        <td>{{ project.start_date }}</td>
+                                        <td>{{ project.end_date }}</td>
+                                        <td>{{ project.plan }}</td>
+                                        <td>{{ project.payment_status }}</td>
+                                        <td>{{ project.status }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#projectModal{{ project.id }}">
+                                                Détails
                                             </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p><strong>Description:</strong> {{ project.description | safe }}</p>
-                                            <hr class="my-4">
-                                            <p><strong>Start Date:</strong> {{ project.start_date }}</p>
-                                            <p><strong>End Date:</strong> {{ project.end_date }}</p>
-                                            <p><strong>Plan:</strong> {{ project.plan }}</p>
-                                            <p><strong>Payment Status:</strong> {{ project.payment_status }}</p>
-                                            <p><strong>Status:</strong> {{ project.status }}</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Modal pour le projet -->
+                                    <div class="modal fade" id="projectModal{{ project.id }}" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="projectModalLabel">{{ project.title }}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p><strong>Description :</strong> {{ project.description | safe }}</p>
+                                                    <hr class="my-4">
+                                                    <p><strong>Date de début :</strong> {{ project.start_date }}</p>
+                                                    <p><strong>Date de fin :</strong> {{ project.end_date }}</p>
+                                                    <p><strong>Plan :</strong> {{ project.plan }}</p>
+                                                    <p><strong>Statut de paiement :</strong> {{ project.payment_status }}</p>
+                                                    <p><strong>Prix :</strong> {{ project.plan.price }} MAD</p>
+
+                                                    <p><strong>Statut :</strong> {{ project.status }}</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                </div
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -133,7 +161,7 @@
     </div>
 </div>
 </section>
-<!-- Load Bootstrap JS (Popper.js and Bootstrap JS) -->
+<!-- Charger les scripts Bootstrap JS (Popper.js et Bootstrap JS) -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

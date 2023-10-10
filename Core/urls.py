@@ -14,6 +14,8 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('signup/', signup, name='signup'),
     path('logout/', logout, name='logout'),
+    # update
+    path('update/', update, name='update'),
 
 
     # dashboard
