@@ -128,8 +128,40 @@ def signup(request):
     title="Register"
     context={'title':title}
 
-    context.update(get_web_info())
-    return render(request, 'User/singup.html', context)
+    # if the method is post
+# get the data : [full_name,username,email,password,phone,company]
+
+    if request.method == 'POST':
+        # get the data
+        full_name = request.POST['full_name']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        phone = request.POST['phone']
+        company = request.POST['company']
+
+        # check if the username or email already exists
+        if Client.objects.filter(username=username).exists() or Client.objects.filter(email=email).exists():
+            context['error'] = 'Username or email already exists'
+            # add get_web_info
+            context.update(get_web_info())
+            # return the login page with error
+            return render(request, 'User/signup.html', context)
+
+        # save the client
+        client = Client(name=full_name, username=username, email=email, password=password, phone_number=phone, company_name=company)
+        client.save()
+
+        # login the client
+        request.session['client_id'] = client.id
+        return home(request)
+
+
+
+    else:
+        context.update(get_web_info())
+        # if the method is get
+        return render(request, 'User/signup.html', context)
 
 
 # logout
@@ -142,11 +174,56 @@ def logout(request):
 
 # client dashboard
 def dashboard(request):
-    return HttpResponse('dashboard')
+    title="Dashboard"
+    context={'title':title}
+   # if client not logged in
+    if 'client_id' not in request.session:
+        return login(request)
+
+    # get all the projects where the client is the owner
+    projects = Project.objects.filter(client=request.session['client_id'])
+
+    client = Client.objects.get(id=request.session['client_id'])
+
+    context['projects'] = projects
+    context['client'] = client
+
+    context.update(get_web_info())
+
+    return render(request, 'User/dashboard.html', context)
+    
 
 
 
 
+
+
+
+# Order a project plan 
+def order(request, id):
+    # if client is not logged in
+    if 'client_id' not in request.session:
+        return login(request)
+    
+    # if the Project already exists
+    if Project.objects.filter(client=request.session['client_id'], plan=id).exists():
+        return dashboard(request)
+    
+        # get the client
+    client = Client.objects.get(id=request.session['client_id'])
+
+    # get the plan
+    plan = Plan.objects.get(id=id)
+
+    # get the Service which the plan belongs to
+    service = plan.service_set.all().first()
+
+    # create the order by creating a Project
+    project = Project(title=service.name+' - '+plan.name, description=service.description, client=client, plan=plan)
+    project.save()
+
+    # return the dashboard  
+    return dashboard(request)
 
 
 

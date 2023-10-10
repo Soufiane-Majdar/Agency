@@ -55,11 +55,33 @@ class Project(models.Model):
     end_date = models.DateField(blank=True, null=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE, blank=True, null=True)
+    PAYMENT_STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('Canceled', 'Canceled'),
+        ('Refunded', 'Refunded'),
+        ('Partially Paid', 'Partially Paid'),
+        ('Paid', 'Paid'),
+        ('Unpaid', 'Unpaid')
+    )
+
+
+    payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='Unpaid')
+
 
     STATUS_CHOICES = (
         ('in_progress', 'In progress'),
-        ('completed', 'Completed'),
-        ('pending', 'Pending'),
+        ('Completed', 'Completed'),
+        ('Delevered', 'Delevered'),
+        ('Pending', 'Pending'),
+        ('Canceled', 'Canceled'),
+        ('On Hold', 'On Hold'),
+        ('On Hosting', 'On Hosting'),
+        ('On Development', 'On Development'),
+        ('On Design', 'On Design'),
+        ('On Testing', 'On Testing'),
+        ('On Maintenance', 'On Maintenance'),
+        ('On Support', 'On Support'),
+        ('On Review', 'On Review'),
     )
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='in_progress')
 

@@ -18,4 +18,7 @@ urlpatterns = [
 
     # dashboard
     path('dashboard/', dashboard, name='dashboard'),
+    
+    # order
+    path('order/<int:id>/', order, name='order'),
 ]
