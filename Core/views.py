@@ -251,8 +251,10 @@ def order(request, id):
     # get the Service which the plan belongs to
     service = plan.service_set.all().first()
 
+    description = "Nous sommes prêts à vous accompagner dans la réalisation de vos objectifs commerciaux."
+
     # create the order by creating a Project
-    project = Project(title=service.name+' - '+plan.name, description=service.description, client=client, plan=plan)
+    project = Project(title=service.name+' - '+plan.name, description=description, client=client, plan=plan)
     project.save()
 
     # return the dashboard  
